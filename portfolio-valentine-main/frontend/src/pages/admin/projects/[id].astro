@@ -1,0 +1,33 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import ProjectEditor from '../../../components/projects/ProjectEditor.vue';
+
+// Mode hybrid - cette page sera rendue côté serveur
+export const prerender = false;
+
+// Récupération de l'ID depuis l'URL
+const { id } = Astro.params;
+
+// Validation basique
+if (!id) {
+  return Astro.redirect('/admin/projects');
+}
+
+// Déterminer le titre de la page
+const isNew = id === 'new';
+const pageTitle = isNew ? 'New Project' : 'Edit Project';
+---
+
+<AdminLayout title={pageTitle}>
+  <div class="project-editor-page">
+    <ProjectEditor projectId={id} client:load />
+  </div>
+</AdminLayout>
+
+<style>
+.project-editor-page {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+</style>

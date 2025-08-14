@@ -1,0 +1,17 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import RetoucheList from '@/components/admin/edit/RetoucheList.vue';
+---
+
+<AdminLayout title="Projects">
+  <div class="projects-page">
+    <RetoucheList client:load />
+  </div>
+</AdminLayout>
+
+<style>
+.projects-page {
+  padding: 0;
+  margin: 0;
+}
+</style>

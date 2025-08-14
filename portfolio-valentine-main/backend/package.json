@@ -1,0 +1,31 @@
+{
+  "name": "portfolio-valentine-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@types/multer": "^2.0.0",
+    "better-sqlite3": "^12.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.0.1",
+    "multer": "^2.0.1",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.7",
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^17.0.1",
+    "tsx": "^4.16.5",
+    "typescript": "^5.7.3"
+  }
+}

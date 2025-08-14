@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DebugPanel from '../../components/DebugPanel.vue';
+---
+
+<BaseLayout title="Debug Panel - Portfolio Valentine">
+  <div class="debug-page">
+    <DebugPanel client:load />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+.debug-page {
+  min-height: 100vh;
+  background-color: $color-gray-lightest;
+}
+</style>

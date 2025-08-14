@@ -1,0 +1,19 @@
+---
+// Page de gestion des utilisateurs - Admin seulement
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import UserList from '../../components/admin/users/UserList.vue';
+---
+
+<AdminLayout title="Gestion des utilisateurs">
+  <div class="users-page">
+    <UserList client:load />
+  </div>
+</AdminLayout>
+
+<style>
+.users-page {
+  padding: 0;
+  margin: 0;
+}
+
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '@/components/ui/Header.vue';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  keywords?: string[];
+}
+
+const { 
+  title,
+  description,
+  image,
+  type = 'website',
+  keywords
+} = Astro.props;
+---
+
+<BaseLayout 
+  title={title}
+  description={description}
+  image={image}
+  type={type}
+  keywords={keywords}
+  bodyClass="public-layout"
+>
+  <!-- Header avec gestion du scroll -->
+  <Header client:only="vue" />
+  
+  <!-- Main Content avec espacement pour le header fixe -->
+  <main class="main-content">
+    <slot />
+  </main>
+  
+</BaseLayout>
+
+<style>
+  .public-layout {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-content {
+    /* Espace pour le header fixe - ajusté selon la hauteur du header */
+    /* padding-top: 80px; */
+    min-height: calc(100vh - 80px);
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      /* padding-top: 70px; */
+      min-height: calc(100vh - 70px);
+    }
+  }
+</style>

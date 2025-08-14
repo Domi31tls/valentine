@@ -1,0 +1,129 @@
+/**
+ * Main.scss
+ *
+ * Architecture centralisée avec CSS Custom Properties
+ * Point d'entrée unique pour tout le design system
+ *
+ * @author Michojito
+ * @version 1.0
+ * @date 2025-07-11
+ */
+
+@use './base' as *;
+
+// ===========================================
+// VARIABLES
+// ===========================================
+
+:root {
+  // == Couleurs Thématiques ==
+  @each $color-name, $color-variants in $colors {
+    @each $variant, $hex-value in $color-variants {
+        // Use string interpolation safely by quoting the color name
+        --color-#{"" + $color-name}-#{$variant}: #{$hex-value};
+    }
+  }
+
+  // == Spacing ==
+  @each $spacing-key, $spacing-value in $spacing {
+    --spacing-#{$spacing-key}: #{$spacing-value};
+  }
+
+  // == Typography ==
+  --font-family-primary: #{$font-family-primary};
+  --font-family-secondary: #{$font-family-secondary};
+
+  @each $font-size-key, $font-size-value in $font-sizes {
+    --font-size-#{$font-size-key}: #{$font-size-value};
+  }
+
+  @each $font-weight-key, $font-weight-value in $font-weights {
+    --font-weight-#{$font-weight-key}: #{$font-weight-value};
+  }
+
+  @each $line-height-key, $line-height-value in $line-heights {
+    --line-height-#{$line-height-key}: #{$line-height-value};
+  }
+
+  // == Border Radius ==
+  @each $border-radius-key, $border-radius-value in $border-radius {
+    --border-radius-#{$border-radius-key}: #{$border-radius-value};
+  }
+
+  // == Z-index ==
+  @each $z-index-key, $z-index-value in $z-index {
+    --z-#{$z-index-key}: #{$z-index-value};
+  }
+
+  // == Transitions ==
+  @each $transition-key, $transition-value in $transition-durations {
+    --duration-#{$transition-key}: #{$transition-value};
+  }
+
+  @each $transition-key, $transition-value in $transition-easings {
+    --easing-#{$transition-key}: #{$transition-value};
+  }
+
+  // == Layout ==
+  
+  --max-width-container: 1200px;
+  --max-width-wide-container: 1500px;
+}
+
+// ===========================================
+// THEMES
+// ===========================================
+:root {
+  --color-background: var(--color-neutral-0);
+  --color-background-secondary: var(--color-neutral-2);
+  --color-background-dark: var(--color-neutral-4);
+  --color-background-dark-secondary: var(--color-neutral-5);
+  --color-background-inverted: var(--color-neutral-5);
+  --color-background-inverted-secondary: var(--color-neutral-4);
+
+  --color-text: var(--color-neutral-5);
+  --color-text-secondary: var(--color-neutral-4);
+  --color-text-inverted: var(--color-neutral-0);
+
+  --color-error-background: var(--color-red-1);
+  --color-error-text: var(--color-red-2);
+
+  --color-success-background: var(--color-green-1);
+  --color-success-text: var(--color-green-2);
+
+  --color-warning-background: var(--color-yellow-1);
+  --color-warning-text: var(--color-yellow-2);
+
+  --color-info-background: var(--color-blue-1);
+  --color-info-text: var(--color-blue-2);
+}
+
+
+// ===========================================
+// GLOBALS
+// ===========================================
+
+body {
+  min-height: 100vh;
+  position: relative;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+// ===========================================
+// LAYOUT COMPONENTS
+// ===========================================
+
+// Container global
+.container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+.wide-container {
+  max-width: var(--max-width-wide-container);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+  

@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LoginForm from '../../components/LoginForm.vue';
+---
+
+<BaseLayout title="Admin - Connexion">
+  <main class="login-page">
+    <div class="login-container">
+      <div class="login-header">
+        <h1>Administration</h1>
+        <p>Accédez à votre espace d'administration</p>
+      </div>
+      
+      <LoginForm client:load />
+      
+      <div class="login-footer">
+        <a href="/" class="back-link">← Retour au portfolio</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+@import '../../styles/variables.scss';
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, $color-gray-dark 0%, lighten($color-gray-dark, 10%) 100%);
+  
+  .login-container {
+    background: $color-white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-header {
+    margin-bottom: 2rem;
+    
+    h1 {
+      color: $color-gray-dark;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    p {
+      color: $color-gray-medium;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+  
+  .login-footer {
+    margin-top: 2rem;
+    
+    .back-link {
+      color: $color-gray-medium;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $color-gray-dark;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    padding: 1rem;
+    
+    .login-container {
+      padding: 2rem;
+    }
+  }
+}
+</style>

@@ -1,0 +1,32 @@
+---
+// frontend/src/pages/admin/retouches/[id].astro
+export const prerender = false;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AuthGuard from '../../../components/AuthGuard.vue';
+import RetoucheEditor from '../../../components/retouches/RetoucheEditor.vue';
+
+// Récupérer l'ID depuis les params
+const { id } = Astro.params;
+
+const title = id === 'new' ? 'New Retouche - Admin' : 'Edit Retouche - Admin';
+---
+
+<BaseLayout title={title}>
+  <AuthGuard client:load>
+    <RetoucheEditor 
+      retoucheId={id || 'new'}
+      client:load 
+    />
+  </AuthGuard>
+</BaseLayout>
+
+<style lang="scss">
+@import '../../../styles/variables.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $color-white;
+}
+</style>

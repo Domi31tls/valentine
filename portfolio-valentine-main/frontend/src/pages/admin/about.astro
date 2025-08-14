@@ -1,0 +1,17 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import AboutEditor from '@/components/admin/about/AboutEditor.vue';
+---
+
+<AdminLayout title="About - Admin">
+  <div class="about-page">
+    <AboutEditor client:load />
+  </div>
+</AdminLayout>
+
+<style>
+  .about-page {
+    padding: 0;
+    margin: 0;
+  }
+</style>

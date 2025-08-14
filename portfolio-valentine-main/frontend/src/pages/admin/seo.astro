@@ -1,0 +1,54 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import SEOAdmin from '../../components/admin/SEOAdmin.vue';
+---
+
+<AdminLayout>
+  <div class="seo-admin-page">
+    <div class="admin-header">
+      <h1>🔍 SEO & Settings</h1>
+      <p class="admin-description">
+        Manage your website's visibility, verification codes, and legal pages
+      </p>
+    </div>
+
+    <SEOAdmin client:load />
+  </div>
+</AdminLayout>
+
+<style lang="scss">
+@import '../../styles/variables.scss';
+
+.seo-admin-page {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h1 {
+    font-size: 2.5rem;
+    color: $color-gray-dark;
+    margin: 0 0 1rem 0;
+  }
+  
+  .admin-description {
+    color: $color-gray-medium;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .seo-admin-page {
+    padding: 1rem;
+  }
+  
+  .admin-header h1 {
+    font-size: 2rem;
+  }
+}
+</style>

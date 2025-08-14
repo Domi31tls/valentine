@@ -1,0 +1,26 @@
+---
+import AuthGuard from '../../components/AuthGuard.vue';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+import ProjectList from '@/components/admin/project/ProjectList.vue';
+import ProjectTile from '@/components/admin/project/ProjectTile.vue';
+import type { Project } from '@/../../shared/types';
+
+const project : Project = {
+  id: '1',
+  title: 'Project 1',
+  description: 'Description of project 1',
+  status: 'published',
+  created_at: new Date(),
+  updated_at: new Date(),
+  is_draft: false,
+  images: [],
+  seo: {},
+};
+---
+
+<AdminLayout title="About - Admin">
+  <AuthGuard client:load>
+    <ProjectTile project={project}/> 
+  </AuthGuard>
+</AdminLayout>

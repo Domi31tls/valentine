@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SubstackEditor from '../../../components/admin/SubstackEditor.vue';
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'mentions-legales' },
+      props: { pageType: 'mentions-legales', pageTitle: 'Legal Notice' }
+    },
+    {
+      params: { slug: 'colophon' },
+      props: { pageType: 'colophon', pageTitle: 'Colophon' }
+    }
+  ];
+}
+
+const { pageType, pageTitle } = Astro.props;
+---
+
+<BaseLayout title={`Éditeur - ${pageTitle}`} description={`Éditeur pour ${pageTitle}`}>
+  <SubstackEditor 
+    client:load 
+    pageType={pageType}
+  />
+</BaseLayout>
+
+<style>
+/* Hide default layout padding for full-screen editor */
+:global(body) {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+:global(.base-layout) {
+  padding: 0 !important;
+}
+</style>

@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-valentine-frontend",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vue": "^4.5.2",
+    "astro": "^4.16.14",
+    "sass": "^1.71.1",
+    "vue": "^3.5.17"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
+  }
+}

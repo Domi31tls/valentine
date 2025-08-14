@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AnalyticsDashboard from '../../components/admin/AnalyticsDashboard.vue';
+---
+
+<AdminLayout title="Analytics Dashboard" description="Statistiques du site web">
+  <AnalyticsDashboard client:load />
+</AdminLayout>

@@ -1,0 +1,54 @@
+---
+export interface SocialMetaProps {
+  title: string;
+  description: string;
+  image: string;
+  url?: string;
+  type?: 'article' | 'website';
+  twitterHandle?: string;
+}
+
+interface Props extends SocialMetaProps {}
+
+const {
+  title,
+  description,
+  image,
+  url = Astro.url.href,
+  type = 'website',
+  twitterHandle
+} = Astro.props;
+
+// S'assurer que l'image est une URL absolue
+const absoluteImageUrl = image.startsWith('http') 
+  ? image 
+  : `${Astro.site?.origin || 'https://valentine-arnaly.com'}${image}`;
+
+const cleanUrl = url.replace(/\/$/, '');
+---
+
+<!-- Open Graph Extended -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:url" content={cleanUrl} />
+<meta property="og:locale" content="fr_FR" />
+
+<!-- Twitter Card Extended -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImageUrl} />
+<meta name="twitter:image:alt" content={title} />
+{twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+{twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
+
+<!-- WhatsApp / Telegram -->
+<meta property="og:image:type" content="image/jpeg" />
+
+<!-- LinkedIn -->
+<meta property="og:image:secure_url" content={absoluteImageUrl} />

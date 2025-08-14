@@ -1,0 +1,94 @@
+/*
+ * base/_components.scss
+ *
+ * @author Michojito
+ * @version 1.0
+ * @date 2025-07-11
+ */
+
+.button {
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-s);
+    border: none;
+    background-color: none;
+    transition: background-color var(--transition-base) var(--transition-easing-ease-in-out);
+  
+    &:hover {
+      background-color: var(--color-background-secondary);
+    }
+
+    &-primary {
+      padding: var(--spacing-3) var(--spacing-5);
+      border-radius: var(--border-radius-m);
+      border: none;
+      background-color: var(--color-text);
+      color: var(--color-background);
+      transition: background-color var(--transition-base) var(--transition-easing-ease-in-out);
+
+      &:hover {
+        background-color: var(--color-text-secondary);
+      }
+    }
+}
+
+.property {
+  display: flex;
+  align-items: flex-start;
+  align-self: stretch;
+  justify-self: stretch;
+  width: 100%;
+  flex: 1;
+
+  &-row {
+    display: flex;
+    padding: var(--spacing-2);
+    align-items: center;
+    gap: var(--spacing-1);
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    flex: 1;
+    position: relative;
+
+    transition: background-color var(--transition-base) var(--transition-easing-ease-in-out);
+
+    &:hover {
+      background-color: var(--color-background-secondary);
+    }
+  }
+
+  &-field {
+    flex: 1;
+  }
+
+  &-title {
+    max-width: 200px;
+    width: 200px; 
+  }
+
+  input, textarea, select {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+  }
+
+  &-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    min-width: 200px;
+    z-index: var(--z-index-dropdown);
+
+    border-bottom-left-radius: var(--border-radius-s);
+    border-bottom-right-radius: var(--border-radius-s);
+    background-color: var(--color-background);
+    padding: var(--spacing-2);
+
+    border-bottom: 1px solid var(--color-background-secondary);
+    border-left: 1px solid var(--color-background-secondary);
+    border-right: 1px solid var(--color-background-secondary);
+
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}

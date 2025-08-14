@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AuthGuard from '@/components/AuthGuard.vue';
+import AdminSidebar from '@/components/admin/UI/AdminSidebar.vue';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+   title = 'Administration', 
+   description = 'Espace d\'administration du portfolio' 
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <AuthGuard client:load>
+    <div class="admin-layout">
+      <AdminSidebar client:load />
+      <div class="admin-main">
+        <main class="admin-content">
+          <slot />
+        </main>
+      </div>
+    </div>
+  </AuthGuard>
+</BaseLayout>
+
+<style scoped lang="scss">
+
+body {
+  background-color: var(--color-background-inverted);
+  color: var(--color-text-inverted);
+}
+
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-5);
+}
+
+.admin-content {
+  flex: 1;
+  padding: var(--spacing-5);
+
+  background: var(--color-background);
+  color: var(--color-text);
+  border-radius: var(--border-radius-l);
+  
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-7);
+}
+</style>

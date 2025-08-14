@@ -1,0 +1,12 @@
+Bonjour {{userName}},
+
+Vous venez de vous connecter avec succès à l'interface d'administration du Portfolio Valentine.
+
+Détails de la connexion :
+- Date et heure : {{loginTime}}
+- Navigateur : {{userAgent}}
+
+⚠️ Si ce n'était pas vous, veuillez nous contacter immédiatement.
+
+Portfolio Valentine Arnaly
+Cet email a été envoyé à {{email}}

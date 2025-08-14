@@ -1,0 +1,81 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Test Admin">
+  <div class="test-admin">
+    <h1>🎉 Bravo ! Vous êtes connecté !</h1>
+    <p>Si vous voyez cette page, c'est que l'authentification fonctionne parfaitement.</p>
+    
+    <div class="test-info">
+      <h3>Prochaines étapes :</h3>
+      <ul>
+        <li>✅ L'authentification fonctionne</li>
+        <li>⏳ Implémenter le CRUD Projets</li>
+        <li>⏳ Implémenter le CRUD Retouches</li>
+        <li>⏳ Finaliser l'interface admin</li>
+      </ul>
+    </div>
+    
+    <div class="actions">
+      <a href="/debug/auth" class="debug-link">🔍 Debug Auth</a>
+      <a href="/admin" class="dashboard-link">📊 Dashboard</a>
+    </div>
+  </div>
+</AdminLayout>
+
+<style>
+.test-admin {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.test-admin h1 {
+  color: #22c55e;
+  margin-bottom: 1rem;
+}
+
+.test-info {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.test-info ul {
+  margin: 1rem 0 0 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.debug-link, .dashboard-link {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.debug-link {
+  background: #3b82f6;
+  color: white;
+}
+
+.dashboard-link {
+  background: #6b7280;
+  color: white;
+}
+
+.debug-link:hover, .dashboard-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+</style>

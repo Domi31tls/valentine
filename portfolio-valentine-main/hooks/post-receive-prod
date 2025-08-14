@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Hook Git post-receive PRODUCTION
+# Fichier: /var/www/portfolio-valentine-prod.git/hooks/post-receive
+# Branch: main → https://valentine-arnaly.com
+
+WORK_TREE="/var/www/portfolio-valentine-prod"
+GIT_DIR="/var/www/portfolio-valentine-prod.git"
+SERVICE_NAME="portfolio-valentine-prod"
+BRANCH="main"
+PORT="3001"
+DOMAIN="valentine-arnaly.com"
+
+# Fonction de log avec timestamp
+log() {
+    echo "[PROD $(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
+# Vérifier la branche
+while read oldrev newrev refname; do
+    if [[ $refname == "refs/heads/$BRANCH" ]]; then
+        log "🚀 Déploiement PRODUCTION déclenché (branch: $BRANCH)"
+        
+        # Checkout des fichiers
+        log "📁 Mise à jour des fichiers..."
+        git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout -f $BRANCH
+        
+        cd $WORK_TREE
+        
+        # Installation et build
+        log "📦 Installation des dépendances..."
+        npm run install:all > /dev/null 2>&1
+        
+        if [ $? -ne 0 ]; then
+            log "❌ ERREUR: Installation des dépendances échouée"
+            exit 1
+        fi
+        
+        log "🔨 Build de l'application..."
+        npm run build > /dev/null 2>&1
+        
+        if [ $? -ne 0 ]; then
+            log "❌ ERREUR: Build échoué"
+            exit 1
+        fi
+        
+        # Redémarrage du service
+        log "🔄 Redémarrage du service PRODUCTION..."
+        sudo systemctl restart $SERVICE_NAME
+        
+        # Test de santé
+        sleep 5
+        log "🏥 Test de santé PRODUCTION..."
+        
+        if curl -f http://localhost:$PORT/api/health > /dev/null 2>&1; then
+            log "✅ PRODUCTION déployée avec succès !"
+            log "🌐 Site en ligne: https://$DOMAIN"
+            
+            # Notification Slack/Discord (optionnel)
+            # curl -X POST -H 'Content-type: application/json' \
+            #   --data "{\"text\":\"✅ Portfolio Valentine PRODUCTION déployé ! https://$DOMAIN\"}" \
+            #   $SLACK_WEBHOOK_URL
+            
+        else
+            log "❌ ERREUR: L'application PRODUCTION ne répond pas"
+            log "📋 Logs: sudo journalctl -u $SERVICE_NAME -f"
+            exit 1
+        fi
+        
+        log "🎉 Déploiement PRODUCTION terminé !"
+    else
+        log "ℹ️  Push sur branche $refname ignoré (PRODUCTION accepte uniquement '$BRANCH')"
+    fi
+done

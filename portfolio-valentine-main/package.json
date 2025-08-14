@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-valentine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:separate": "echo '🚀 Démarrez les serveurs séparément:' && echo 'Terminal 1: npm run dev:frontend' && echo 'Terminal 2: npm run dev:backend'",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "cd backend && npm start",
+    "preview": "cd frontend && npm run preview",
+    "install:all": "npm install && cd frontend && npm install && cd .. && cd backend && npm install && cd ..",
+    "deploy:build": "npm run install:all && npm run build",
+    "deploy:test": "npm run deploy:build && npm run start"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.1.0",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/node": "^22.10.7",
+    "concurrently": "^8.2.2",
+    "tsx": "^4.16.5",
+    "typescript": "^5.7.3"
+  }
+}

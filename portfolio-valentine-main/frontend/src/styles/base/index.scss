@@ -1,0 +1,17 @@
+/**
+ * base/index.scss
+ *
+ * Architecture centralisée Point d'entrée unique 
+ * pour toute la base de styles
+ *
+ * @author Michojito
+ * @version 1.0
+ * @date 2025-07-11
+ */
+
+ @forward 'reset';
+ @forward 'variables';
+ @forward 'typography';
+ @forward 'components';
+ @forward 'animations';
+ 

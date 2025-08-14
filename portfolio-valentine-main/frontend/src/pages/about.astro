@@ -1,0 +1,11 @@
+---
+import PublicLayout from '@/layouts/PublicLayout.astro';
+import AboutPage from '@/components/about/AboutPage.vue';
+---
+
+<PublicLayout 
+  title="À propos - Valentine Arnaly" 
+  description="Valentine Arnaly est une photographe basée à Toulouse, spécialisée dans l'amélioration de l'image de marque. Diplômée du prestigieux Auguste Renoir BTS et formée auprès du renommé photographe Nicolas Guérin."
+>
+  <AboutPage client:load />
+</PublicLayout>

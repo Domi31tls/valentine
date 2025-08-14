@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TokenVerifier from '../../components/TokenVerifier.vue';
+---
+
+<BaseLayout title="Admin - Vérification">
+  <main class="verify-page">
+    <div class="verify-container">
+      <TokenVerifier client:load />
+    </div>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+@import '../../styles/variables.scss';
+
+.verify-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, $color-gray-dark 0%, lighten($color-gray-dark, 10%) 100%);
+  
+  .verify-container {
+    background: $color-white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .verify-page {
+    padding: 1rem;
+    
+    .verify-container {
+      padding: 2rem;
+    }
+  }
+}
+</style>

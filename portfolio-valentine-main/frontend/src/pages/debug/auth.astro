@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthDebugPanel from '../../components/AuthDebugPanel.vue';
+---
+
+<BaseLayout title="Debug - Authentification">
+  <main class="debug-page">
+    <AuthDebugPanel client:load />
+  </main>
+</BaseLayout>
+
+<style>
+.debug-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+</style>

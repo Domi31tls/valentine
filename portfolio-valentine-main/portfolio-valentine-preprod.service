@@ -1,0 +1,39 @@
+[Unit]
+Description=Portfolio Valentine - PREPROD
+Documentation=https://preview.valentine-arnaly.com
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/portfolio-valentine-preprod/backend
+ExecStart=/usr/bin/node dist/server.js
+Restart=always
+RestartSec=5
+
+# Variables d'environnement PREPROD
+Environment=NODE_ENV=development
+Environment=PORT=3002
+Environment=SITE_URL=https://preview.valentine-arnaly.com
+Environment=JWT_SECRET=preprod-secret-jwt-key-valentine-test
+Environment=SMTP_HOST=mail.infomaniak.com
+Environment=SMTP_PORT=465
+Environment=SMTP_USER=hello@buro.ooo
+Environment=SMTP_PASS=Th1s-1s-Bur0
+Environment=SMTP_FROM=hello@buro.ooo
+Environment=DEV_SHOW_MAGIC_LINKS=true
+
+# Logs avec préfixe PREPROD
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=portfolio-valentine-preprod
+
+# Sécurité standard pour preprod
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/var/www/portfolio-valentine-preprod
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Récupérer les mentions légales depuis l'API
+let mentionsData = null;
+let error = null;
+
+try {
+  // Construire l'URL complète pour SSR
+  const baseUrl = import.meta.env.PROD 
+    ? 'https://portfolio-valentine-production.up.railway.app' 
+    : 'http://localhost:3001';
+  
+  const response = await fetch(`${baseUrl}/api/legal/mentions-legales`);
+  if (response.ok) {
+    const data = await response.json();
+    if (data.success) {
+      mentionsData = data.data;
+    } else {
+      console.warn('Failed to load legal page from API, using default content');
+    }
+  } else {
+    console.warn('API request failed, using default content');
+  }
+} catch (e) {
+  console.warn('Error fetching legal page, using default content:', e);
+}
+
+// Contenu par défaut si l'API échoue
+const defaultContent = {
+  title: 'Mentions Légales',
+  content: `# Mentions Légales
+
+**Valentine Arnaly**  
+Photographe professionnel  
+Email : contact@valentine-arnaly.com
+
+## Hébergement
+[Informations d'hébergement à compléter]
+
+## Propriété intellectuelle
+Toutes les photographies présentes sur ce site sont la propriété exclusive de Valentine Arnaly. 
+Toute reproduction, même partielle, est interdite sans autorisation écrite préalable.
+
+## Données personnelles
+Les données personnelles collectées via le formulaire de contact sont utilisées uniquement pour répondre à vos demandes.
+
+## Cookies
+Ce site utilise des cookies pour améliorer votre expérience de navigation.`
+};
+
+const pageData = mentionsData || defaultContent;
+---
+
+<BaseLayout 
+  title={`${pageData.title} - Valentine Arnaly`}
+  description="Mentions légales du site de Valentine Arnaly, photographe professionnel"
+  type="website"
+>
+  <main class="legal-page">
+    <div class="container">
+      <header class="page-header">
+        <h1>{pageData.title}</h1>
+        <nav class="breadcrumb">
+          <a href="/">Accueil</a>
+          <span class="separator">></span>
+          <span class="current">{pageData.title}</span>
+        </nav>
+      </header>
+      
+      <section class="page-content">
+        
+        <div class="content-wrapper">
+          <!-- Le contenu Markdown sera converti en HTML -->
+          <div class="markdown-content" set:html={pageData.content.replace(/\n/g, '<br/>')} />
+        </div>
+      </section>
+      
+      <footer class="page-footer">
+        <p>
+          <a href="/" class="back-link">← Retour à l'accueil</a>
+          <a href="/colophon" class="related-link">Voir le colophon</a>
+        </p>
+      </footer>
+    </div>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+@import '../styles/variables.scss';
+
+.legal-page {
+  min-height: 100vh;
+  padding: 2rem 0;
+  background: $color-white;
+  color: $color-gray-dark;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+  text-align: center;
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: $color-gray-dark;
+  }
+  
+  .breadcrumb {
+    font-size: 0.9rem;
+    color: $color-gray-medium;
+    
+    a {
+      color: $color-gray-medium;
+      text-decoration: none;
+      
+      &:hover {
+        color: $color-gray-dark;
+        text-decoration: underline;
+      }
+    }
+    
+    .separator {
+      margin: 0 0.5rem;
+    }
+    
+    .current {
+      color: $color-gray-dark;
+      font-weight: 500;
+    }
+  }
+}
+
+.page-content {
+  margin-bottom: 3rem;
+  
+  .error-notice {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    
+    p {
+      margin: 0;
+      color: #991b1b;
+    }
+  }
+  
+  .content-wrapper {
+    background: lighten($color-gray-light, 3%);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid $color-gray-light;
+  }
+  
+  .markdown-content {
+    line-height: 1.7;
+    
+    h1, h2, h3 {
+      color: $color-gray-dark;
+      margin: 2rem 0 1rem 0;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    p {
+      margin: 1rem 0;
+      color: $color-gray-medium;
+    }
+    
+    strong {
+      color: $color-gray-dark;
+      font-weight: 600;
+    }
+    
+    a {
+      color: $color-gray-dark;
+      text-decoration: underline;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.page-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid $color-gray-light;
+  
+  p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+  }
+  
+  a {
+    color: $color-gray-medium;
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      color: $color-gray-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+  
+  .page-footer p {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+</style>
